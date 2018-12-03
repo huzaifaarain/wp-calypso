@@ -25,6 +25,7 @@ import isHappychatOpen from 'state/happychat/selectors/is-happychat-open';
 import hasActiveHappychatSession from 'state/happychat/selectors/has-active-happychat-session';
 import AsyncLoad from 'components/async-load';
 import WpcomChecklist from 'my-sites/checklist/wpcom-checklist';
+import { getSectionName } from 'state/ui/selectors';
 
 /**
  * Module variables
@@ -57,6 +58,13 @@ class InlineHelp extends Component {
 	componentDidMount() {
 		if ( globalKeyboardShortcuts ) {
 			globalKeyboardShortcuts.showInlineHelp = this.showInlineHelp;
+		}
+
+		// Pop up inline help when in site preview
+		// @TODO: Update logic to only include folks coming from signup/checkout
+		// and to exclude people who've dismissed the pop-up.
+		if ( 'preview' === this.props.getSectionName ) {
+			this.showInlineHelp();
 		}
 	}
 
@@ -230,6 +238,7 @@ const mapStateToProps = state => {
 	return {
 		isHappychatButtonVisible: hasActiveHappychatSession( state ),
 		isHappychatOpen: isHappychatOpen( state ),
+		getSectionName: getSectionName( state ),
 	};
 };
 
