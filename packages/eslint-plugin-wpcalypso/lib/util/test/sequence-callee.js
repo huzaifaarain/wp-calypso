@@ -6,7 +6,7 @@
  */
 
 var assert = require( 'assert' );
-var getCallee = require( '../../../lib/util/get-callee' );
+var getCallee = require( '../get-callee' );
 
 describe( '#getCallee', function() {
 	it( 'should return non-sequence callee', function() {

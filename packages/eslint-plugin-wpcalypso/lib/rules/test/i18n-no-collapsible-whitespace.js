@@ -12,9 +12,9 @@ var NO_NEWLINES, NO_CONSECUTIVE_SPACES, NO_TABS;
 // Requirements
 //------------------------------------------------------------------------------
 
-var rule = require( '../../../lib/rules/i18n-no-collapsible-whitespace' ),
+var rule = require( '../i18n-no-collapsible-whitespace' ),
 	config = { env: { es6: true } }, // support for string templates
-	formatMessage = require( '../../util/format-message' ),
+	formatMessage = require( '../../../tests/util/format-message' ),
 	RuleTester = require( 'eslint' ).RuleTester;
 
 //------------------------------------------------------------------------------

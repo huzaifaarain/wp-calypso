@@ -12,8 +12,8 @@ var EXPECTED_FOO_ERROR, EXPECTED_FOO_PREFIX_ERROR;
 // Requirements
 //------------------------------------------------------------------------------
 
-var rule = require( '../../../lib/rules/jsx-classname-namespace' ),
-	formatMessage = require( '../../util/format-message' ),
+var rule = require( '../jsx-classname-namespace' ),
+	formatMessage = require( '../../../tests/util/format-message' ),
 	RuleTester = require( 'eslint' ).RuleTester;
 
 //------------------------------------------------------------------------------
