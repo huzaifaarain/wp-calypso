@@ -4,7 +4,7 @@
   "description": "Custom ESLint rules for the WordPress.com Calypso project",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Automattic/eslint-plugin-wpcalypso.git"
+    "url": "https://github.com/Automattic/wp-calypso.git"
   },
   "keywords": [
     "eslint",
