@@ -5,13 +5,12 @@
  * @copyright 2016 Automattic. All rights reserved.
  * See LICENSE.md file in root directory for full license.
  */
-'use strict';
 
 //------------------------------------------------------------------------------
 // Helper Functions
 //------------------------------------------------------------------------------
 
-var getCallee = require( '../util/get-callee' ),
+const getCallee = require( '../util/get-callee' ),
 	getTextContentFromNode = require( '../util/get-text-content-from-node' );
 
 //------------------------------------------------------------------------------
@@ -26,7 +25,7 @@ var rule = ( module.exports = function( context ) {
 			}
 
 			node.arguments.forEach( function( arg ) {
-				var string = getTextContentFromNode( arg ),
+				let string = getTextContentFromNode( arg ),
 					collapsibleWhitespace,
 					problem,
 					problemString,

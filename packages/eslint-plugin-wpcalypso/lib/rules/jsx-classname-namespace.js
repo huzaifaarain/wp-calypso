@@ -5,13 +5,12 @@
  * @copyright 2016 Automattic. All rights reserved.
  * See LICENSE.md file in root directory for full license.
  */
-'use strict';
 
 //------------------------------------------------------------------------------
 // Requirements
 //------------------------------------------------------------------------------
 
-var path = require( 'path' );
+const path = require( 'path' );
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -45,7 +44,7 @@ var rule = ( module.exports = function( context ) {
 	}
 
 	function isRenderCallExpression( node ) {
-		var calleeName;
+		let calleeName;
 		if ( 'CallExpression' !== node.type ) {
 			return false;
 		}
@@ -85,7 +84,7 @@ var rule = ( module.exports = function( context ) {
 	}
 
 	function getFunctionReturnValue( node ) {
-		var i, bodyNode;
+		let i, bodyNode;
 
 		// An arrow function expression is one whose return statement is
 		// implicit. It does not have a body block.
@@ -120,7 +119,7 @@ var rule = ( module.exports = function( context ) {
 	}
 
 	function isRootElementInFile( node ) {
-		var element,
+		let element,
 			isElementReturnArg,
 			elementAssignedIdentifier,
 			parent,
@@ -247,7 +246,7 @@ var rule = ( module.exports = function( context ) {
 
 	return {
 		JSXAttribute: function( node ) {
-			var rawClassName,
+			let rawClassName,
 				filename,
 				isRootElement,
 				isRootFile,

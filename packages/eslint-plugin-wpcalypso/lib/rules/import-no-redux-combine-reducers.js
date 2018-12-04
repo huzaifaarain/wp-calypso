@@ -5,7 +5,6 @@
  * @copyright 2017 Automattic. All rights reserved.
  * See LICENSE.md file in root directory for full license.
  */
-'use strict';
 
 //------------------------------------------------------------------------------
 // Rule Definition

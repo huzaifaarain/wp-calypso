@@ -24,7 +24,7 @@ function getTextContentFromNode( node ) {
 	// Literal strings => node.value
 	// We don't need to handle TeplateLiterals with multiple quasis, because
 	// we don't support expressions in literals.
-	var left, right;
+	let left, right;
 
 	if ( node.type === 'BinaryExpression' && node.operator === '+' ) {
 		left = getTextContentFromNode( node.left );

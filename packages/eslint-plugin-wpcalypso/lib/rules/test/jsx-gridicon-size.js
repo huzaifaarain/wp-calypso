@@ -10,7 +10,7 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-var rule = require( '../../../lib/rules/jsx-gridicon-size' ),
+const rule = require( '../../../lib/rules/jsx-gridicon-size' ),
 	RuleTester = require( 'eslint' ).RuleTester;
 
 //------------------------------------------------------------------------------

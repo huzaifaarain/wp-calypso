@@ -6,19 +6,19 @@
  * See LICENSE.md file in root directory for full license.
  */
 
-var assert = require( 'assert' );
-var getTextContentFromNode = require( '../../../lib/util/get-text-content-from-node.js' );
-var config = require( '../../../.eslintrc.json' );
-var parser = require( config.parser );
+const assert = require( 'assert' );
+const getTextContentFromNode = require( '../../../lib/util/get-text-content-from-node.js' );
+const config = require( '../../../.eslintrc.json' );
+const parser = require( config.parser );
 
 function parseCode( code ) {
-	var programNode = parser.parse( code, config.env );
+	const programNode = parser.parse( code, config.env );
 	// Espree thinks it's parsing a whole program, so we just need to peel away
 	// the 'Program' packaging.
 	return programNode.body[ 0 ];
 }
 function parseExpressionStatement( code ) {
-	var node = parseCode( code ).expression;
+	const node = parseCode( code ).expression;
 	return node;
 }
 
@@ -59,14 +59,14 @@ describe( '#getStringFromNode', function() {
 	} );
 
 	it( 'should return false for functions', function() {
-		var functionNode = parseExpressionStatement( 'foo()' );
+		const functionNode = parseExpressionStatement( 'foo()' );
 
 		assert.strictEqual( false, getTextContentFromNode( functionNode ) );
 	} );
 
 	it( 'should return false for variable assignments', function() {
-		var variableDeclarationNode = parseCode( "var aVariable = 'a string to assign';" );
-		var variableDeclarator = variableDeclarationNode.declarations[ 0 ];
+		const variableDeclarationNode = parseCode( "var aVariable = 'a string to assign';" );
+		const variableDeclarator = variableDeclarationNode.declarations[ 0 ];
 
 		assert.strictEqual( false, getTextContentFromNode( variableDeclarationNode ) );
 		assert.strictEqual( false, getTextContentFromNode( variableDeclarator ) );

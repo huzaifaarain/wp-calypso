@@ -5,19 +5,18 @@
  * @copyright 2016 Automattic. All rights reserved.
  * See LICENSE.md file in root directory for full license.
  */
-'use strict';
 
 //------------------------------------------------------------------------------
 // Constants
 //------------------------------------------------------------------------------
 
-var VERIFY_OPTION_LITERALS = [ 'context', 'comment', 'original', 'single', 'plural' ];
+const VERIFY_OPTION_LITERALS = [ 'context', 'comment', 'original', 'single', 'plural' ];
 
 //------------------------------------------------------------------------------
 // Helper Functions
 //------------------------------------------------------------------------------
 
-var getCallee = require( '../util/get-callee' );
+const getCallee = require( '../util/get-callee' );
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -44,7 +43,7 @@ var rule = ( module.exports = function( context ) {
 
 	function validateOptions( options ) {
 		return options.properties.every( function( property ) {
-			var key = property.key.name;
+			const key = property.key.name;
 
 			// `options.original` can be a string value to be validated in this
 			// block, or as an object should validate its nested single and
@@ -67,13 +66,13 @@ var rule = ( module.exports = function( context ) {
 
 	return {
 		CallExpression: function( node ) {
-			var options;
+			let options;
 			if ( 'translate' !== getCallee( node ).name ) {
 				return;
 			}
 
 			node.arguments.forEach( function( arg, i ) {
-				var isLastArgument = i === node.arguments.length - 1;
+				const isLastArgument = i === node.arguments.length - 1;
 
 				// Ignore last argument in multi-argument translate call, which
 				// should be the object argument

@@ -13,7 +13,7 @@
  * @return {Object}      First non-sequence callee
  */
 var getCallee = ( module.exports = function( node ) {
-	var callee = node.callee;
+	const callee = node.callee;
 	if ( ! callee ) {
 		return node;
 	}

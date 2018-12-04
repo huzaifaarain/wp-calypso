@@ -5,20 +5,19 @@
  * @copyright 2016 Automattic. All rights reserved.
  * See LICENSE.md file in root directory for full license.
  */
-'use strict';
 
 //------------------------------------------------------------------------------
 // Constants
 //------------------------------------------------------------------------------
 
 // Regular expression adapted from sprintf.js. See CREDITS.md for license information.
-var RX_PLACEHOLDERS = /(?:\x25\x25)|(\x25(?:(?:[1-9]\d*)\$|\((?:[^\)]+)\))?(?:\+)?(?:0|'[^$])?(?:-)?(?:\d+)?(?:\.(?:\d+))?(?:[b-fiosuxX]))/g; // eslint-disable-line max-len
+const RX_PLACEHOLDERS = /(?:\x25\x25)|(\x25(?:(?:[1-9]\d*)\$|\((?:[^\)]+)\))?(?:\+)?(?:0|'[^$])?(?:-)?(?:\d+)?(?:\.(?:\d+))?(?:[b-fiosuxX]))/g; // eslint-disable-line max-len
 
 //------------------------------------------------------------------------------
 // Helper Functions
 //------------------------------------------------------------------------------
 
-var getCallee = require( '../util/get-callee' ),
+const getCallee = require( '../util/get-callee' ),
 	getTextContentFromNode = require( '../util/get-text-content-from-node' );
 
 //------------------------------------------------------------------------------
@@ -28,7 +27,7 @@ var getCallee = require( '../util/get-callee' ),
 var rule = ( module.exports = function( context ) {
 	return {
 		CallExpression: function( node ) {
-			var singular, plural, singularMatch, pluralMatch;
+			let singular, plural, singularMatch, pluralMatch;
 			if ( 'translate' !== getCallee( node ).name ) {
 				return;
 			}

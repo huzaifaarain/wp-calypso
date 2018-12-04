@@ -5,15 +5,14 @@
  * @copyright 2016 Automattic. All rights reserved.
  * See LICENSE.md file in root directory for full license.
  */
-'use strict';
 
-var EXPECTED_FOO_ERROR, EXPECTED_FOO_PREFIX_ERROR;
+let EXPECTED_FOO_ERROR, EXPECTED_FOO_PREFIX_ERROR;
 
 //------------------------------------------------------------------------------
 // Requirements
 //------------------------------------------------------------------------------
 
-var rule = require( '../jsx-classname-namespace' ),
+const rule = require( '../jsx-classname-namespace' ),
 	formatMessage = require( '../../../tests/util/format-message' ),
 	RuleTester = require( 'eslint' ).RuleTester;
 

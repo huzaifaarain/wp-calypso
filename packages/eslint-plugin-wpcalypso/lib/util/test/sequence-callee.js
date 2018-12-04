@@ -6,12 +6,12 @@
  * See LICENSE.md file in root directory for full license.
  */
 
-var assert = require( 'assert' );
-var getCallee = require( '../get-callee' );
+const assert = require( 'assert' );
+const getCallee = require( '../get-callee' );
 
 describe( '#getCallee', function() {
 	it( 'should return non-sequence callee', function() {
-		var node, callee;
+		let node, callee;
 		node = {
 			type: 'CallExpression',
 			callee: {
@@ -25,7 +25,7 @@ describe( '#getCallee', function() {
 	} );
 
 	it( 'should return first non-sequence callee expression', function() {
-		var node, callee;
+		let node, callee;
 		node = {
 			type: 'CallExpression',
 			callee: {
@@ -48,7 +48,7 @@ describe( '#getCallee', function() {
 	} );
 
 	it( 'should return first non-sequence member property', function() {
-		var node, callee;
+		let node, callee;
 		node = {
 			type: 'CallExpression',
 			callee: {

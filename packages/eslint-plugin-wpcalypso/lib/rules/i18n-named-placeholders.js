@@ -5,26 +5,25 @@
  * @copyright 2016 Automattic. All rights reserved.
  * See LICENSE.md file in root directory for full license.
  */
-'use strict';
 
-var rule;
+let rule;
 
 //------------------------------------------------------------------------------
 // Constants
 //------------------------------------------------------------------------------
 
 // Regular expression adapted from sprintf.js. See CREDITS.md for license information.
-var RX_PLACEHOLDERS = /(?:\x25\x25)|(\x25(?:(?:[1-9]\d*)\$|\((?:[^\)]+)\))?(?:\+)?(?:0|'[^$])?(?:-)?(?:\d+)?(?:\.(?:\d+))?(?:[b-fiosuxX]))/g; // eslint-disable-line max-len
+const RX_PLACEHOLDERS = /(?:\x25\x25)|(\x25(?:(?:[1-9]\d*)\$|\((?:[^\)]+)\))?(?:\+)?(?:0|'[^$])?(?:-)?(?:\d+)?(?:\.(?:\d+))?(?:[b-fiosuxX]))/g; // eslint-disable-line max-len
 
 //------------------------------------------------------------------------------
 // Helper Functions
 //------------------------------------------------------------------------------
 
-var getCallee = require( '../util/get-callee' ),
+const getCallee = require( '../util/get-callee' ),
 	getTextContentFromNode = require( '../util/get-text-content-from-node' );
 
 function hasUnqualifiedPlaceholders( string ) {
-	var placeholders = string.match( RX_PLACEHOLDERS ) || [];
+	const placeholders = string.match( RX_PLACEHOLDERS ) || [];
 	if ( placeholders.length <= 1 ) {
 		return false;
 	}
@@ -41,7 +40,7 @@ function hasUnqualifiedPlaceholders( string ) {
 rule = module.exports = function( context ) {
 	return {
 		CallExpression: function( node ) {
-			var singular, plural;
+			let singular, plural;
 
 			// Done if no args are passed
 			if ( node.arguments.length === 0 ) {

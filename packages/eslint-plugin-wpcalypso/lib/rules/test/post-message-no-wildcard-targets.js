@@ -5,13 +5,12 @@
  * @copyright 2017 Automattic. All rights reserved.
  * See LICENSE.md file in root directory for full license.
  */
-'use strict';
 
 //------------------------------------------------------------------------------
 // Requirements
 //------------------------------------------------------------------------------
 
-var rule = require( '../../../lib/rules/post-message-no-wildcard-targets' ),
+const rule = require( '../../../lib/rules/post-message-no-wildcard-targets' ),
 	config = { env: { es6: true } },
 	RuleTester = require( 'eslint' ).RuleTester;
 

@@ -5,15 +5,14 @@
  * @copyright 2016 Automattic. All rights reserved.
  * See LICENSE.md file in root directory for full license.
  */
-'use strict';
 
-var NO_NEWLINES, NO_CONSECUTIVE_SPACES, NO_TABS;
+let NO_NEWLINES, NO_CONSECUTIVE_SPACES, NO_TABS;
 
 //------------------------------------------------------------------------------
 // Requirements
 //------------------------------------------------------------------------------
 
-var rule = require( '../i18n-no-collapsible-whitespace' ),
+const rule = require( '../i18n-no-collapsible-whitespace' ),
 	config = { env: { es6: true } }, // support for string templates
 	formatMessage = require( '../../../tests/util/format-message' ),
 	RuleTester = require( 'eslint' ).RuleTester;

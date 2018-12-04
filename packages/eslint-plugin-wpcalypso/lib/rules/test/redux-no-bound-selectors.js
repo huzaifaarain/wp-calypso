@@ -6,13 +6,12 @@
  * @copyright 2017 Automattic. All rights reserved.
  * See LICENSE.md file in root directory for full license.
  */
-'use strict';
 
 //------------------------------------------------------------------------------
 // Requirements
 //------------------------------------------------------------------------------
 
-var rule = require( '../../../lib/rules/redux-no-bound-selectors' ),
+const rule = require( '../../../lib/rules/redux-no-bound-selectors' ),
 	RuleTester = require( 'eslint' ).RuleTester;
 
 const REF = ' See wp-calypso#14024';

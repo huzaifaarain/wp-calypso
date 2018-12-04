@@ -6,8 +6,8 @@
  * See LICENSE.md file in root directory for full license.
  */
 
-var assert = require( 'assert' );
-var formatMessage = require( './format-message.js' );
+const assert = require( 'assert' );
+const formatMessage = require( './format-message.js' );
 
 describe( 'test utils', function() {
 	describe( 'formatMessage', function() {
