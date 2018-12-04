@@ -1,3 +1,4 @@
+/** @format */
 /**
  * @fileoverview Disallow using three dots in translate strings
  * @author Automattic
@@ -30,10 +31,7 @@ function makeFixerFunction( arg ) {
 		switch ( arg.type ) {
 			case 'TemplateLiteral':
 				return arg.quasis.reduce( ( fixes, quasi ) => {
-					if (
-						'TemplateElement' === quasi.type &&
-						containsThreeDots( quasi.value.raw )
-					) {
+					if ( 'TemplateElement' === quasi.type && containsThreeDots( quasi.value.raw ) ) {
 						fixes.push(
 							fixer.replaceTextRange(
 								[ quasi.start, quasi.end ],
@@ -48,12 +46,15 @@ function makeFixerFunction( arg ) {
 				return [ fixer.replaceText( arg, replaceThreeDotsWithEllipsis( arg.raw ) ) ];
 
 			case 'BinaryExpression':
-				return [ ...makeFixerFunction( arg.left )( fixer ), ...makeFixerFunction( arg.right )( fixer ) ];
+				return [
+					...makeFixerFunction( arg.left )( fixer ),
+					...makeFixerFunction( arg.right )( fixer ),
+				];
 		}
 	};
 }
 
-var rule = module.exports = function( context ) {
+var rule = ( module.exports = function( context ) {
 	return {
 		CallExpression: function( node ) {
 			if ( 'translate' !== getCallee( node ).name ) {
@@ -72,7 +73,7 @@ var rule = module.exports = function( context ) {
 			} );
 		},
 	};
-};
+} );
 
 rule.ERROR_MESSAGE = 'Use ellipsis character (…) in place of three dots';
 

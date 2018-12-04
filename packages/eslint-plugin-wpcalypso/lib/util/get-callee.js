@@ -1,3 +1,4 @@
+/** @format */
 /**
  * @fileoverview Utility for retrieving callee identifier node from a CallExpression
  * @author Automattic
@@ -11,7 +12,7 @@
  * @param  {Object} node CallExpression node
  * @return {Object}      First non-sequence callee
  */
-var getCallee = module.exports = function( node ) {
+var getCallee = ( module.exports = function( node ) {
 	var callee = node.callee;
 	if ( ! callee ) {
 		return node;
@@ -26,4 +27,4 @@ var getCallee = module.exports = function( node ) {
 	}
 
 	return callee;
-};
+} );

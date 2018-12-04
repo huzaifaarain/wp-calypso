@@ -1,3 +1,4 @@
+/** @format */
 /**
  * @fileoverview Disallow combineReducers import from redux
  * @author Automattic
@@ -24,7 +25,7 @@ module.exports = {
 			ImportDeclaration( node ) {
 				if ( node.source.value === 'redux' ) {
 					const hasCombineReducersFromRedux = node.specifiers.some(
-						( specifier ) => ( specifier.imported.name === 'combineReducers' )
+						specifier => specifier.imported.name === 'combineReducers'
 					);
 					if ( hasCombineReducersFromRedux ) {
 						context.report( node, ERROR_MESSAGE );

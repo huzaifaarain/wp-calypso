@@ -1,3 +1,4 @@
+/** @format */
 /**
  * @fileoverview Disallow the use of this.translate
  * @author Automattic
@@ -10,7 +11,8 @@
 // Rule Definition
 //------------------------------------------------------------------------------
 
-const ERROR_MESSAGE = 'Use localize( ReactComponent ) instead of this.translate. See https://git.io/vSwRi';
+const ERROR_MESSAGE =
+	'Use localize( ReactComponent ) instead of this.translate. See https://git.io/vSwRi';
 
 module.exports = {
 	meta: {
@@ -24,9 +26,11 @@ module.exports = {
 	create: function( context ) {
 		return {
 			CallExpression: function( node ) {
-				if ( node.callee.type === 'MemberExpression' &&
+				if (
+					node.callee.type === 'MemberExpression' &&
 					node.callee.object.type === 'ThisExpression' &&
-					node.callee.property.name === 'translate' ) {
+					node.callee.property.name === 'translate'
+				) {
 					context.report( node, ERROR_MESSAGE );
 				}
 			},

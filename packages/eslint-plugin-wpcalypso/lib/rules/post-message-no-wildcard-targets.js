@@ -1,3 +1,4 @@
+/** @format */
 /**
  * @fileoverview Disallow using the wildcard `*` in postMessage
  * @author Automattic
@@ -17,7 +18,7 @@ var getCallee = require( '../util/get-callee' ),
 // Rule Definition
 //------------------------------------------------------------------------------
 
-var rule = module.exports = function( context ) {
+var rule = ( module.exports = function( context ) {
 	return {
 		CallExpression: function( node ) {
 			if ( 'postMessage' !== getCallee( node ).name ) {
@@ -34,7 +35,7 @@ var rule = module.exports = function( context ) {
 			}
 		},
 	};
-};
+} );
 
 rule.ERROR_MESSAGE = 'Always provide a specific targetOrigin, not *';
 

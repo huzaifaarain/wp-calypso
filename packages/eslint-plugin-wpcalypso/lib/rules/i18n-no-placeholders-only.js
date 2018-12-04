@@ -1,3 +1,4 @@
+/** @format */
 /**
  * @fileoverview Disallow strings which include only placeholders
  * @author Automattic
@@ -25,7 +26,7 @@ var getCallee = require( '../util/get-callee' ),
 // Rule Definition
 //------------------------------------------------------------------------------
 
-var rule = module.exports = function( context ) {
+var rule = ( module.exports = function( context ) {
 	return {
 		CallExpression: function( node ) {
 			if ( 'translate' !== getCallee( node ).name ) {
@@ -51,8 +52,8 @@ var rule = module.exports = function( context ) {
 			} );
 		},
 	};
-};
+} );
 
-rule.ERROR_MESSAGE = 'We shouldn\'t translate strings that are entirely placeholder';
+rule.ERROR_MESSAGE = "We shouldn't translate strings that are entirely placeholder";
 
 rule.schema = [];

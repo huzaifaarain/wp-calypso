@@ -1,3 +1,4 @@
+/** @format */
 /**
  * @fileoverview Utility for extracting strings from node
  * @author Automattic
@@ -23,23 +24,38 @@ function parseExpressionStatement( code ) {
 
 describe( '#getStringFromNode', function() {
 	it( 'should return simple strings', function() {
-		assert.equal( 'a simple string', getTextContentFromNode( parseExpressionStatement( "'a simple string'" ) ) );
+		assert.equal(
+			'a simple string',
+			getTextContentFromNode( parseExpressionStatement( "'a simple string'" ) )
+		);
 	} );
 
 	it( 'should return concatentated strings', function() {
-		assert.equal( 'A string in two parts', getTextContentFromNode( parseExpressionStatement( '"A string" + " in two parts"' ) ) );
+		assert.equal(
+			'A string in two parts',
+			getTextContentFromNode( parseExpressionStatement( '"A string" + " in two parts"' ) )
+		);
 	} );
 
 	it( 'should return concatentated strings', function() {
-		assert.equal( 'A string in three parts', getTextContentFromNode( parseExpressionStatement( '"A string" + " in " + "three parts"' ) ) );
+		assert.equal(
+			'A string in three parts',
+			getTextContentFromNode( parseExpressionStatement( '"A string" + " in " + "three parts"' ) )
+		);
 	} );
 
 	it( 'should return strings from template literals', function() {
-		assert.equal( 'A template literal string', getTextContentFromNode( parseExpressionStatement( '`A template literal string`' ) ) );
+		assert.equal(
+			'A template literal string',
+			getTextContentFromNode( parseExpressionStatement( '`A template literal string`' ) )
+		);
 	} );
 
 	it( 'should handle different literal types', function() {
-		assert.equal( 'A template and a string', getTextContentFromNode( parseExpressionStatement( '`A template` + " and a string"' ) ) );
+		assert.equal(
+			'A template and a string',
+			getTextContentFromNode( parseExpressionStatement( '`A template` + " and a string"' ) )
+		);
 	} );
 
 	it( 'should return false for functions', function() {
@@ -57,7 +73,9 @@ describe( '#getStringFromNode', function() {
 	} );
 
 	it( 'should return false for a binary structure including invalid node types', function() {
-		assert.strictEqual( false, getTextContentFromNode( parseExpressionStatement( "'a string plus a function' + foo()" ) ) );
+		assert.strictEqual(
+			false,
+			getTextContentFromNode( parseExpressionStatement( "'a string plus a function' + foo()" ) )
+		);
 	} );
 } );
-

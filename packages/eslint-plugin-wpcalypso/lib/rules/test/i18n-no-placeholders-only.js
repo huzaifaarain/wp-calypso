@@ -1,3 +1,4 @@
+/** @format */
 /**
  * @fileoverview Disallow strings which include only placeholders
  * @author Automattic
@@ -18,49 +19,57 @@ var rule = require( '../../../lib/rules/i18n-no-placeholders-only' ),
 // Tests
 //------------------------------------------------------------------------------
 
-( new RuleTester( config ) ).run( 'i18n-no-placeholders-only', rule, {
+new RuleTester( config ).run( 'i18n-no-placeholders-only', rule, {
 	valid: [
 		{
-			code: 'translate( \'Hello %s\' );',
+			code: "translate( 'Hello %s' );",
 		},
 		{
-			code: 'translate( \'Hello %(toWhom)s\' );',
+			code: "translate( 'Hello %(toWhom)s' );",
 		},
 		{
 			code: 'translate( `Hello %(toWhom)s` );',
 		},
 		{
-			code: 'translate( \'%s%%s\' );',
+			code: "translate( '%s%%s' );",
 		},
 		{
-			code: 'translate( \'{{example}}Hello World{{/example}}\' );',
+			code: "translate( '{{example}}Hello World{{/example}}' );",
 		},
 	],
 
 	invalid: [
 		{
-			code: 'translate( \'%s%d\' );',
-			errors: [ {
-				message: rule.ERROR_MESSAGE,
-			} ],
+			code: "translate( '%s%d' );",
+			errors: [
+				{
+					message: rule.ERROR_MESSAGE,
+				},
+			],
 		},
 		{
 			code: 'translate( `%s%d` );',
-			errors: [ {
-				message: rule.ERROR_MESSAGE,
-			} ],
+			errors: [
+				{
+					message: rule.ERROR_MESSAGE,
+				},
+			],
 		},
 		{
-			code: 'translate( \'Hello World\', \'%s%d\' );',
-			errors: [ {
-				message: rule.ERROR_MESSAGE,
-			} ],
+			code: "translate( 'Hello World', '%s%d' );",
+			errors: [
+				{
+					message: rule.ERROR_MESSAGE,
+				},
+			],
 		},
 		{
-			code: 'translate( \'{{example}}%s{{/example}}\' );',
-			errors: [ {
-				message: rule.ERROR_MESSAGE,
-			} ],
+			code: "translate( '{{example}}%s{{/example}}' );",
+			errors: [
+				{
+					message: rule.ERROR_MESSAGE,
+				},
+			],
 		},
 	],
 } );

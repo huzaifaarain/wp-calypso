@@ -1,3 +1,4 @@
+/** @format */
 /**
  * @fileoverview Ensure placeholder counts match between singular and plural strings
  * @author Automattic
@@ -18,40 +19,48 @@ var rule = require( '../../../lib/rules/i18n-mismatched-placeholders' ),
 // Tests
 //------------------------------------------------------------------------------
 
-( new RuleTester( config ) ).run( 'i18n-mismatched-placeholders', rule, {
+new RuleTester( config ).run( 'i18n-mismatched-placeholders', rule, {
 	valid: [
 		{
-			code: 'translate( \'Hello %s\' );',
+			code: "translate( 'Hello %s' );",
 		},
 		{
-			code: 'translate( \'Hello %s\', \'Hello %s\' );',
+			code: "translate( 'Hello %s', 'Hello %s' );",
 		},
 	],
 
 	invalid: [
 		{
-			code: 'translate( \'One thing\', \'%s things\', { count: 2 } );',
-			errors: [ {
-				message: rule.ERROR_MESSAGE,
-			} ],
+			code: "translate( 'One thing', '%s things', { count: 2 } );",
+			errors: [
+				{
+					message: rule.ERROR_MESSAGE,
+				},
+			],
 		},
 		{
-			code: 'translate( \'%s thing\', \'Many things\', { count: 2 } );',
-			errors: [ {
-				message: rule.ERROR_MESSAGE,
-			} ],
+			code: "translate( '%s thing', 'Many things', { count: 2 } );",
+			errors: [
+				{
+					message: rule.ERROR_MESSAGE,
+				},
+			],
 		},
 		{
-			code: 'translate( \'%s%s\', \'%s\', { count: 2 } );',
-			errors: [ {
-				message: rule.ERROR_MESSAGE,
-			} ],
+			code: "translate( '%s%s', '%s', { count: 2 } );",
+			errors: [
+				{
+					message: rule.ERROR_MESSAGE,
+				},
+			],
 		},
 		{
 			code: 'translate( `%s%s`, `%s`, { count: 2 } );',
-			errors: [ {
-				message: rule.ERROR_MESSAGE,
-			} ],
+			errors: [
+				{
+					message: rule.ERROR_MESSAGE,
+				},
+			],
 		},
 	],
 } );

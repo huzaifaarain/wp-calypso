@@ -1,3 +1,4 @@
+/** @format */
 /**
  * @fileoverview Disallow using three dots in translate strings
  * @author Automattic
@@ -18,16 +19,16 @@ var rule = require( '../../../lib/rules/i18n-ellipsis' ),
 // Tests
 //------------------------------------------------------------------------------
 
-( new RuleTester( config ) ).run( 'i18n-ellipsis', rule, {
+new RuleTester( config ).run( 'i18n-ellipsis', rule, {
 	valid: [
 		{
-			code: 'translate( \'Hello World…\' );',
+			code: "translate( 'Hello World…' );",
 		},
 		{
-			code: 'i18n.translate( \'Hello World…\' );',
+			code: "i18n.translate( 'Hello World…' );",
 		},
 		{
-			code: 'this.translate( \'Hello World…\' );',
+			code: "this.translate( 'Hello World…' );",
 		},
 		{
 			code: 'translate( "Hello World…" );',
@@ -39,104 +40,130 @@ var rule = require( '../../../lib/rules/i18n-ellipsis' ),
 			code: 'translate( `Hello ${ World }…` );',
 		},
 		{
-			code: 'translate( \'Hello World…\', \'Hello Worlds…\' );',
+			code: "translate( 'Hello World…', 'Hello Worlds…' );",
 		},
 		{
-			code: '( 0, translate )( \'Hello World…\' );',
+			code: "( 0, translate )( 'Hello World…' );",
 		},
 	],
 
 	invalid: [
 		{
-			code: 'translate( \'Hello World...\' );',
-			errors: [ {
-				message: rule.ERROR_MESSAGE,
-			} ],
-			output: 'translate( \'Hello World…\' );',
+			code: "translate( 'Hello World...' );",
+			errors: [
+				{
+					message: rule.ERROR_MESSAGE,
+				},
+			],
+			output: "translate( 'Hello World…' );",
 		},
 		{
-			code: 'i18n.translate( \'Hello World...\' );',
-			errors: [ {
-				message: rule.ERROR_MESSAGE,
-			} ],
-			output: 'i18n.translate( \'Hello World…\' );',
+			code: "i18n.translate( 'Hello World...' );",
+			errors: [
+				{
+					message: rule.ERROR_MESSAGE,
+				},
+			],
+			output: "i18n.translate( 'Hello World…' );",
 		},
 		{
-			code: 'this.translate( \'Hello World...\' );',
-			errors: [ {
-				message: rule.ERROR_MESSAGE,
-			} ],
-			output: 'this.translate( \'Hello World…\' );',
+			code: "this.translate( 'Hello World...' );",
+			errors: [
+				{
+					message: rule.ERROR_MESSAGE,
+				},
+			],
+			output: "this.translate( 'Hello World…' );",
 		},
 		{
 			code: 'translate( "Hello World..." );',
-			errors: [ {
-				message: rule.ERROR_MESSAGE,
-			} ],
+			errors: [
+				{
+					message: rule.ERROR_MESSAGE,
+				},
+			],
 			output: 'translate( "Hello World…" );',
 		},
 		{
-			code: 'translate( \'Fix... \' + \'Joined strings...\' );',
-			errors: [ {
-				message: rule.ERROR_MESSAGE,
-			} ],
-			output: 'translate( \'Fix… \' + \'Joined strings…\' );',
+			code: "translate( 'Fix... ' + 'Joined strings...' );",
+			errors: [
+				{
+					message: rule.ERROR_MESSAGE,
+				},
+			],
+			output: "translate( 'Fix… ' + 'Joined strings…' );",
 		},
 		{
-			code: 'translate( \'Fix ...\' + `Joined template` );',
-			errors: [ {
-				message: rule.ERROR_MESSAGE,
-			} ],
-			output: 'translate( \'Fix …\' + `Joined template` );',
+			code: "translate( 'Fix ...' + `Joined template` );",
+			errors: [
+				{
+					message: rule.ERROR_MESSAGE,
+				},
+			],
+			output: "translate( 'Fix …' + `Joined template` );",
 		},
 		{
-			code: 'translate( \'Fix ...\' + \'Multiple ... \' + \'Joined ...\' );',
-			errors: [ {
-				message: rule.ERROR_MESSAGE,
-			} ],
-			output: 'translate( \'Fix …\' + \'Multiple … \' + \'Joined …\' );',
+			code: "translate( 'Fix ...' + 'Multiple ... ' + 'Joined ...' );",
+			errors: [
+				{
+					message: rule.ERROR_MESSAGE,
+				},
+			],
+			output: "translate( 'Fix …' + 'Multiple … ' + 'Joined …' );",
 		},
 		{
 			code: 'translate( `Hello World...` );',
-			errors: [ {
-				message: rule.ERROR_MESSAGE,
-			} ],
+			errors: [
+				{
+					message: rule.ERROR_MESSAGE,
+				},
+			],
 			output: 'translate( `Hello World…` );',
 		},
 		{
 			code: 'translate( `Hello ${ "World" }...` );',
-			errors: [ {
-				message: rule.ERROR_MESSAGE,
-			} ],
+			errors: [
+				{
+					message: rule.ERROR_MESSAGE,
+				},
+			],
 			output: 'translate( `Hello ${ "World" }…` );',
 		},
 		{
 			code: 'translate( `Hello ${ world }...` );',
-			errors: [ {
-				message: rule.ERROR_MESSAGE,
-			} ],
+			errors: [
+				{
+					message: rule.ERROR_MESSAGE,
+				},
+			],
 			output: 'translate( `Hello ${ world }…` );',
 		},
 		{
-			code: 'translate( \'Hello World...\' );',
-			errors: [ {
-				message: rule.ERROR_MESSAGE,
-			} ],
-			output: 'translate( \'Hello World…\' );',
+			code: "translate( 'Hello World...' );",
+			errors: [
+				{
+					message: rule.ERROR_MESSAGE,
+				},
+			],
+			output: "translate( 'Hello World…' );",
 		},
 		{
-			code: 'translate( \'Hello World…\', \'Hello Worlds...\' );',
-			errors: [ {
-				message: rule.ERROR_MESSAGE,
-			} ],
-			output: 'translate( \'Hello World…\', \'Hello Worlds…\' );',
+			code: "translate( 'Hello World…', 'Hello Worlds...' );",
+			errors: [
+				{
+					message: rule.ERROR_MESSAGE,
+				},
+			],
+			output: "translate( 'Hello World…', 'Hello Worlds…' );",
 		},
 		{
-			code: '( 0, translate )( \'Hello World...\' );',
-			errors: [ {
-				message: rule.ERROR_MESSAGE,
-			} ],
-			output: '( 0, translate )( \'Hello World…\' );',
+			code: "( 0, translate )( 'Hello World...' );",
+			errors: [
+				{
+					message: rule.ERROR_MESSAGE,
+				},
+			],
+			output: "( 0, translate )( 'Hello World…' );",
 		},
 	],
 } );

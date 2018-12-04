@@ -1,3 +1,4 @@
+/** @format */
 /**
  * @fileoverview Ensure placeholder counts match between singular and plural strings
  * @author Automattic
@@ -24,7 +25,7 @@ var getCallee = require( '../util/get-callee' ),
 // Rule Definition
 //------------------------------------------------------------------------------
 
-var rule = module.exports = function( context ) {
+var rule = ( module.exports = function( context ) {
 	return {
 		CallExpression: function( node ) {
 			var singular, plural, singularMatch, pluralMatch;
@@ -53,14 +54,16 @@ var rule = module.exports = function( context ) {
 				return;
 			}
 
-			if ( ( singularMatch && ! pluralMatch ) ||
-					( ! singularMatch && pluralMatch ) ||
-					( singularMatch.length !== pluralMatch.length ) ) {
+			if (
+				( singularMatch && ! pluralMatch ) ||
+				( ! singularMatch && pluralMatch ) ||
+				singularMatch.length !== pluralMatch.length
+			) {
 				context.report( node, rule.ERROR_MESSAGE );
 			}
 		},
 	};
-};
+} );
 
 rule.ERROR_MESSAGE = 'Should have same number of placeholders between singular and plural';
 

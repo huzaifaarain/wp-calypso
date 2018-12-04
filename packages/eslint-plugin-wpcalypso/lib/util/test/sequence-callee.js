@@ -1,3 +1,4 @@
+/** @format */
 /**
  * @fileoverview Utility for retrieving callee identifier node from a CallExpression
  * @author Automattic
@@ -29,13 +30,16 @@ describe( '#getCallee', function() {
 			type: 'CallExpression',
 			callee: {
 				type: 'SequenceExpression',
-				expressions: [ {
-					type: 'Literal',
-					value: 0,
-				}, {
-					type: 'Identifier',
-					name: 'translate',
-				} ],
+				expressions: [
+					{
+						type: 'Literal',
+						value: 0,
+					},
+					{
+						type: 'Identifier',
+						name: 'translate',
+					},
+				],
 			},
 		};
 		callee = getCallee( node );

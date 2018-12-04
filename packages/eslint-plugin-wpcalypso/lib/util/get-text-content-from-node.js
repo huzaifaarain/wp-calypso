@@ -1,3 +1,4 @@
+/** @format */
 /**
  * @fileoverview Utility for retrieving the final translatable string from an AST
  * node for tests that focus on the strings themselves.
@@ -40,9 +41,11 @@ function getTextContentFromNode( node ) {
 
 	// template literals are specced at https://github.com/babel/babylon/blob/master/ast/spec.md
 	if ( node.type === 'TemplateLiteral' ) {
-		return node.quasis.map( function( quasis ) {
-			return quasis.value.raw;
-		} ).join( '' );
+		return node.quasis
+			.map( function( quasis ) {
+				return quasis.value.raw;
+			} )
+			.join( '' );
 	}
 
 	return false;

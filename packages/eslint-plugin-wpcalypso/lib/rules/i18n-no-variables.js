@@ -1,3 +1,4 @@
+/** @format */
 /**
  * @fileoverview Disallow variables as translate strings
  * @author Automattic
@@ -22,12 +23,14 @@ var getCallee = require( '../util/get-callee' );
 // Rule Definition
 //------------------------------------------------------------------------------
 
-var rule = module.exports = function( context ) {
+var rule = ( module.exports = function( context ) {
 	function isAcceptableLiteralNode( node ) {
 		if ( 'BinaryExpression' === node.type ) {
-			return '+' === node.operator &&
+			return (
+				'+' === node.operator &&
 				isAcceptableLiteralNode( node.left ) &&
-				isAcceptableLiteralNode( node.right );
+				isAcceptableLiteralNode( node.right )
+			);
 		}
 
 		if ( 'TemplateLiteral' === node.type ) {
@@ -96,7 +99,7 @@ var rule = module.exports = function( context ) {
 			}
 		},
 	};
-};
+} );
 
 rule.ERROR_MESSAGE = 'Variables cannot be used in translatable strings';
 

@@ -1,3 +1,4 @@
+/** @format */
 /**
  * @fileoverview Disallow collapsible whitespace in translatable strings
  * @author Automattic
@@ -29,13 +30,13 @@ NO_TABS = formatMessage( rule.ERROR_MESSAGE, { problem: ' (\\t)' } );
 // Tests
 //------------------------------------------------------------------------------
 
-( new RuleTester( config ) ).run( 'i18n-no-collapsible-whitespace', rule, {
+new RuleTester( config ).run( 'i18n-no-collapsible-whitespace', rule, {
 	valid: [
 		{
-			code: 'this.translate( \'Hello World…\' );',
+			code: "this.translate( 'Hello World…' );",
 		},
 		{
-			code: 'i18n.translate( \'Hello World…\' );',
+			code: "i18n.translate( 'Hello World…' );",
 		},
 		{
 			code: "translate( 'Hello World!' ) + '<br>' + translate( 'More text on another line' );",
@@ -46,58 +47,73 @@ NO_TABS = formatMessage( rule.ERROR_MESSAGE, { problem: ' (\\t)' } );
 		{
 			code: 'translate( `A long string ` +\n `spread over ` +\n  `multiple lines.` );',
 		},
-
 	],
 
 	invalid: [
 		{
 			code: 'translate( "My double-quoted string\\nwith a newline" );',
-			errors: [ {
-				message: NO_NEWLINES,
-				problem: ' (\\n)',
-			} ],
+			errors: [
+				{
+					message: NO_NEWLINES,
+					problem: ' (\\n)',
+				},
+			],
 		},
 		{
 			code: "translate( 'My single quoted string\\nwith a newline' );",
-			errors: [ {
-				message: NO_NEWLINES,
-			} ],
+			errors: [
+				{
+					message: NO_NEWLINES,
+				},
+			],
 		},
 		{
 			code: 'translate( `My template literal\non two lines` );',
-			errors: [ {
-				message: NO_NEWLINES,
-			} ],
+			errors: [
+				{
+					message: NO_NEWLINES,
+				},
+			],
 		},
 		{
 			code: "translate( '	My tab-indented string.' );",
-			errors: [ {
-				message: NO_TABS,
-			} ],
+			errors: [
+				{
+					message: NO_TABS,
+				},
+			],
 		},
 		{
 			code: "translate( '\tMy string with a tab escape sequence.' );",
-			errors: [ {
-				message: NO_TABS,
-			} ],
+			errors: [
+				{
+					message: NO_TABS,
+				},
+			],
 		},
 		{
 			code: "translate( '\u0009My string with a unicode tab.' );",
-			errors: [ {
-				message: NO_TABS,
-			} ],
+			errors: [
+				{
+					message: NO_TABS,
+				},
+			],
 		},
 		{
 			code: 'translate( `A string with \r a carriage return.` );',
-			errors: [ {
-				message: NO_NEWLINES,
-			} ],
+			errors: [
+				{
+					message: NO_NEWLINES,
+				},
+			],
 		},
 		{
 			code: "translate( 'A string with consecutive spaces.  These two are after a full stop.' );",
-			errors: [ {
-				message: NO_CONSECUTIVE_SPACES,
-			} ],
+			errors: [
+				{
+					message: NO_CONSECUTIVE_SPACES,
+				},
+			],
 		},
 	],
 } );

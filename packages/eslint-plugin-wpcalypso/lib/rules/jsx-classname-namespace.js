@@ -1,3 +1,4 @@
+/** @format */
 /**
  * @fileoverview Ensure JSX className adheres to CSS namespace guidelines
  * @author Automattic
@@ -16,7 +17,7 @@ var path = require( 'path' );
 // Rule Definition
 //------------------------------------------------------------------------------
 
-var rule = module.exports = function( context ) {
+var rule = ( module.exports = function( context ) {
 	const rootFiles = ( context.options[ 0 ] || {} ).rootFiles || rule.DEFAULT_ROOT_FILES;
 
 	function isModuleExportNode( node ) {
@@ -75,11 +76,12 @@ var rule = module.exports = function( context ) {
 	}
 
 	function isFunctionType( node ) {
-		return -1 !== [
-			'FunctionExpression',
-			'FunctionDeclaration',
-			'ArrowFunctionExpression',
-		].indexOf( node.type );
+		return (
+			-1 !==
+			[ 'FunctionExpression', 'FunctionDeclaration', 'ArrowFunctionExpression' ].indexOf(
+				node.type
+			)
+		);
 	}
 
 	function getFunctionReturnValue( node ) {
@@ -118,8 +120,13 @@ var rule = module.exports = function( context ) {
 	}
 
 	function isRootElementInFile( node ) {
-		var element, isElementReturnArg, elementAssignedIdentifier, parent,
-			functionExpression, functionName, isRoot;
+		var element,
+			isElementReturnArg,
+			elementAssignedIdentifier,
+			parent,
+			functionExpression,
+			functionName,
+			isRoot;
 
 		element = node.parent.parent;
 
@@ -172,23 +179,30 @@ var rule = module.exports = function( context ) {
 				switch ( parent.type ) {
 					case 'ArrowFunctionExpression':
 					case 'FunctionDeclaration':
-						if ( 'ExportDefaultDeclaration' === parent.parent.type ||
-								isModuleExportNode( parent.parent ) ) {
+						if (
+							'ExportDefaultDeclaration' === parent.parent.type ||
+							isModuleExportNode( parent.parent )
+						) {
 							isRoot = true;
 						}
 						break;
 
 					case 'FunctionExpression':
-						if ( 'AssignmentExpression' === parent.parent.type &&
-								isModuleExportNode( parent.parent.parent ) ) {
+						if (
+							'AssignmentExpression' === parent.parent.type &&
+							isModuleExportNode( parent.parent.parent )
+						) {
 							isRoot = true;
 						}
 				}
 
 				// If we suspect the element is the root, confirm that it's the
 				// return value of the function
-				if ( isRoot && ! isElementReturnArg &&
-						! isSameIdentifier( elementAssignedIdentifier, getFunctionReturnValue( parent ) ) ) {
+				if (
+					isRoot &&
+					! isElementReturnArg &&
+					! isSameIdentifier( elementAssignedIdentifier, getFunctionReturnValue( parent ) )
+				) {
 					isRoot = false;
 				}
 			}
@@ -210,19 +224,21 @@ var rule = module.exports = function( context ) {
 						break;
 				}
 
-				isRoot = !! functionName && parent.body.some( function( programNode ) {
-					if ( 'ExportDefaultDeclaration' === programNode.type ) {
-						return isIdentifierInDescendents( programNode.declaration, functionName );
-					}
+				isRoot =
+					!! functionName &&
+					parent.body.some( function( programNode ) {
+						if ( 'ExportDefaultDeclaration' === programNode.type ) {
+							return isIdentifierInDescendents( programNode.declaration, functionName );
+						}
 
-					// `module.exports` assignment, check that right-side
-					// assignment value matches function name
-					if ( isModuleExportNode( programNode ) ) {
-						return isIdentifierInDescendents( programNode.expression.right, functionName );
-					}
+						// `module.exports` assignment, check that right-side
+						// assignment value matches function name
+						if ( isModuleExportNode( programNode ) ) {
+							return isIdentifierInDescendents( programNode.expression.right, functionName );
+						}
 
-					return false;
-				} );
+						return false;
+					} );
 			}
 		} while ( parent.parent );
 
@@ -231,8 +247,15 @@ var rule = module.exports = function( context ) {
 
 	return {
 		JSXAttribute: function( node ) {
-			var rawClassName, filename, isRootElement, isRootFile, classNames,
-				namespace, prefixPattern, isError, expected;
+			var rawClassName,
+				filename,
+				isRootElement,
+				isRootFile,
+				classNames,
+				namespace,
+				prefixPattern,
+				isError,
+				expected;
 
 			if ( 'className' !== node.name.name ) {
 				return;
@@ -281,7 +304,9 @@ var rule = module.exports = function( context ) {
 			}
 
 			if ( isRootElement && ! isRootFile ) {
-				expected += ` or to be in ${ rootFiles.length > 1 ? 'one of ' : '' }${ rootFiles.join( ', ' ) }`;
+				expected += ` or to be in ${ rootFiles.length > 1 ? 'one of ' : '' }${ rootFiles.join(
+					', '
+				) }`;
 			}
 
 			context.report( {
@@ -291,7 +316,7 @@ var rule = module.exports = function( context ) {
 			} );
 		},
 	};
-};
+} );
 
 rule.ERROR_MESSAGE = 'className should follow CSS namespace guidelines (expected {{expected}})';
 rule.DEFAULT_ROOT_FILES = [ 'index.js', 'index.jsx' ];

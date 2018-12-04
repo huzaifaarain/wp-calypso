@@ -1,3 +1,4 @@
+/** @format */
 
 /**
  * @fileoverview Disallow creation of selectors bound to Redux state
@@ -22,7 +23,7 @@ const FUNC_ERROR_MESSAGE = "Don't instantiate functions within `connect`." + REF
 // Tests
 //------------------------------------------------------------------------------
 
-( new RuleTester() ).run( 'redux-no-bound-selectors', rule, {
+new RuleTester().run( 'redux-no-bound-selectors', rule, {
 	valid: [
 		`createSelector( function( state ) {
 			return state.foos.map( function( foo ) {
@@ -79,9 +80,11 @@ const FUNC_ERROR_MESSAGE = "Don't instantiate functions within `connect`." + REF
 					getSite: getSite.bind( null, state )
 				};
 			} )( Foo )`,
-			errors: [ {
-				message: BIND_ERROR_MESSAGE,
-			} ],
+			errors: [
+				{
+					message: BIND_ERROR_MESSAGE,
+				},
+			],
 		},
 		{
 			code: `connect( function( state ) {
@@ -89,9 +92,11 @@ const FUNC_ERROR_MESSAGE = "Don't instantiate functions within `connect`." + REF
 					getSite: bind( getSite, state )
 				};
 			} )( Foo )`,
-			errors: [ {
-				message: BIND_ERROR_MESSAGE,
-			} ],
+			errors: [
+				{
+					message: BIND_ERROR_MESSAGE,
+				},
+			],
 		},
 		{
 			code: `connect( function( state ) {
@@ -99,9 +104,11 @@ const FUNC_ERROR_MESSAGE = "Don't instantiate functions within `connect`." + REF
 					getSite: partial( getSite, state )
 				};
 			} )( Foo )`,
-			errors: [ {
-				message: BIND_ERROR_MESSAGE,
-			} ],
+			errors: [
+				{
+					message: BIND_ERROR_MESSAGE,
+				},
+			],
 		},
 		{
 			code: `connect( function( state ) {
@@ -109,9 +116,11 @@ const FUNC_ERROR_MESSAGE = "Don't instantiate functions within `connect`." + REF
 					getSite: partialRight( getSite, state )
 				};
 			} )( Foo )`,
-			errors: [ {
-				message: BIND_ERROR_MESSAGE,
-			} ],
+			errors: [
+				{
+					message: BIND_ERROR_MESSAGE,
+				},
+			],
 		},
 		{
 			code: `connect( function( state ) {
@@ -121,9 +130,11 @@ const FUNC_ERROR_MESSAGE = "Don't instantiate functions within `connect`." + REF
 					}
 				};
 			} )( Foo )`,
-			errors: [ {
-				message: FUNC_ERROR_MESSAGE,
-			} ],
+			errors: [
+				{
+					message: FUNC_ERROR_MESSAGE,
+				},
+			],
 		},
 		{
 			code: `var mapState = function( state ) {
@@ -136,10 +147,7 @@ const FUNC_ERROR_MESSAGE = "Don't instantiate functions within `connect`." + REF
 			};
 			connect( mapState );
 			`,
-			errors: [
-				{ message: BIND_ERROR_MESSAGE },
-				{ message: FUNC_ERROR_MESSAGE },
-			],
+			errors: [ { message: BIND_ERROR_MESSAGE }, { message: FUNC_ERROR_MESSAGE } ],
 		},
 	],
 } );

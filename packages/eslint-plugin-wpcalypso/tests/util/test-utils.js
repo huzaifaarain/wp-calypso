@@ -1,3 +1,4 @@
+/** @format */
 /**
  * @fileoverview Utility for extracting strings from node
  * @author Automattic
@@ -15,8 +16,10 @@ describe( 'test utils', function() {
 		} );
 
 		it( 'should replace the placeholder with the property with the same name', function() {
-			assert.equal( 'A substituted string', formatMessage( 'A{{adjective}} {{noun}}',
-				{ adjective: ' substituted', noun: 'string' } ) );
+			assert.equal(
+				'A substituted string',
+				formatMessage( 'A{{adjective}} {{noun}}', { adjective: ' substituted', noun: 'string' } )
+			);
 		} );
 	} );
 } );

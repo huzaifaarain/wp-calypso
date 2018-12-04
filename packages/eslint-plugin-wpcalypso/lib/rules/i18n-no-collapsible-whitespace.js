@@ -1,3 +1,4 @@
+/** @format */
 /**
  * @fileoverview Disallow collapsible whitespace in translatable strings.
  * @author Automattic
@@ -17,7 +18,7 @@ var getCallee = require( '../util/get-callee' ),
 // Rule Definition
 //------------------------------------------------------------------------------
 
-var rule = module.exports = function( context ) {
+var rule = ( module.exports = function( context ) {
 	return {
 		CallExpression: function( node ) {
 			if ( 'translate' !== getCallee( node ).name ) {
@@ -26,7 +27,10 @@ var rule = module.exports = function( context ) {
 
 			node.arguments.forEach( function( arg ) {
 				var string = getTextContentFromNode( arg ),
-					collapsibleWhitespace, problem, problemString, problemsByCharCode;
+					collapsibleWhitespace,
+					problem,
+					problemString,
+					problemsByCharCode;
 
 				if ( ! string ) {
 					return;
@@ -54,7 +58,7 @@ var rule = module.exports = function( context ) {
 			} );
 		},
 	};
-};
+} );
 
 rule.ERROR_MESSAGE = 'Translations should not contain collapsible whitespace{{problem}}';
 
