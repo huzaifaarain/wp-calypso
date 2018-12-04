@@ -6,20 +6,18 @@
  * See LICENSE.md file in root directory for full license.
  */
 
-const assert = require( 'assert' );
-const formatMessage = require( './format-message.js' );
+const formatMessage = require( '../format-message.js' );
 
 describe( 'test utils', function() {
 	describe( 'formatMessage', function() {
-		it( 'should not change the string without a matching placeholder', function() {
-			assert.equal( 'An unchanged {{message}}', formatMessage( 'An unchanged {{message}}', {} ) );
+		test( 'should not change the string without a matching placeholder', function() {
+			expect( formatMessage( 'An unchanged {{message}}', {} ) ).toBe( 'An unchanged {{message}}' );
 		} );
 
-		it( 'should replace the placeholder with the property with the same name', function() {
-			assert.equal(
-				'A substituted string',
+		test( 'should replace the placeholder with the property with the same name', function() {
+			expect(
 				formatMessage( 'A{{adjective}} {{noun}}', { adjective: ' substituted', noun: 'string' } )
-			);
+			).toBe( 'A substituted string' );
 		} );
 	} );
 } );
