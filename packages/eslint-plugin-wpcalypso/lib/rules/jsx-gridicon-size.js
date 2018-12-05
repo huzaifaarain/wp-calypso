@@ -16,7 +16,7 @@ const VALID_SIZES = [ 12, 18, 24, 36, 48, 54, 72 ];
 // Rule Definition
 //------------------------------------------------------------------------------
 
-var rule = ( module.exports = function( context ) {
+const rule = ( module.exports = function( context ) {
 	return {
 		JSXAttribute: function( node ) {
 			if (

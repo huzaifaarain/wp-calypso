@@ -22,7 +22,7 @@ const getCallee = require( '../util/get-callee' );
 // Rule Definition
 //------------------------------------------------------------------------------
 
-var rule = ( module.exports = function( context ) {
+const rule = ( module.exports = function( context ) {
 	function isAcceptableLiteralNode( node ) {
 		if ( 'BinaryExpression' === node.type ) {
 			return (
@@ -66,7 +66,6 @@ var rule = ( module.exports = function( context ) {
 
 	return {
 		CallExpression: function( node ) {
-			let options;
 			if ( 'translate' !== getCallee( node ).name ) {
 				return;
 			}
@@ -92,7 +91,7 @@ var rule = ( module.exports = function( context ) {
 			} );
 
 			// Verify that option literals are not variables
-			options = node.arguments[ node.arguments.length - 1 ];
+			const options = node.arguments[ node.arguments.length - 1 ];
 			if ( options && options.type === 'ObjectExpression' ) {
 				validateOptions( options );
 			}

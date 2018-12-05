@@ -6,8 +6,6 @@
  * See LICENSE.md file in root directory for full license.
  */
 
-let rule;
-
 //------------------------------------------------------------------------------
 // Constants
 //------------------------------------------------------------------------------
@@ -37,11 +35,9 @@ function hasUnqualifiedPlaceholders( string ) {
 // Rule Definition
 //------------------------------------------------------------------------------
 
-rule = module.exports = function( context ) {
+const rule = ( module.exports = function( context ) {
 	return {
 		CallExpression: function( node ) {
-			let singular, plural;
-
 			// Done if no args are passed
 			if ( node.arguments.length === 0 ) {
 				return;
@@ -52,7 +48,7 @@ rule = module.exports = function( context ) {
 			}
 
 			// Find unqualified placeholders in singular
-			singular = getTextContentFromNode( node.arguments[ 0 ] );
+			const singular = getTextContentFromNode( node.arguments[ 0 ] );
 			if ( 'string' === typeof singular && hasUnqualifiedPlaceholders( singular ) ) {
 				context.report( node.arguments[ 0 ], rule.ERROR_MESSAGE );
 				return;
@@ -64,13 +60,13 @@ rule = module.exports = function( context ) {
 			}
 
 			// Find unqualified placeholders in plural
-			plural = getTextContentFromNode( node.arguments[ 1 ] );
+			const plural = getTextContentFromNode( node.arguments[ 1 ] );
 			if ( 'string' === typeof plural && hasUnqualifiedPlaceholders( plural ) ) {
 				context.report( node.arguments[ 1 ], rule.ERROR_MESSAGE );
 			}
 		},
 	};
-};
+} );
 
 rule.ERROR_MESSAGE = 'Multiple placeholders should be named';
 

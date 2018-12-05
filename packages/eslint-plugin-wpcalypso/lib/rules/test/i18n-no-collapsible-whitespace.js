@@ -6,8 +6,6 @@
  * See LICENSE.md file in root directory for full license.
  */
 
-let NO_NEWLINES, NO_CONSECUTIVE_SPACES, NO_TABS;
-
 //------------------------------------------------------------------------------
 // Requirements
 //------------------------------------------------------------------------------
@@ -21,9 +19,11 @@ const rule = require( '../i18n-no-collapsible-whitespace' ),
 // Constants
 //------------------------------------------------------------------------------
 
-NO_NEWLINES = formatMessage( rule.ERROR_MESSAGE, { problem: ' (\\n)' } );
-NO_CONSECUTIVE_SPACES = formatMessage( rule.ERROR_MESSAGE, { problem: ' (consecutive spaces)' } );
-NO_TABS = formatMessage( rule.ERROR_MESSAGE, { problem: ' (\\t)' } );
+const NO_NEWLINES = formatMessage( rule.ERROR_MESSAGE, { problem: ' (\\n)' } );
+const NO_CONSECUTIVE_SPACES = formatMessage( rule.ERROR_MESSAGE, {
+	problem: ' (consecutive spaces)',
+} );
+const NO_TABS = formatMessage( rule.ERROR_MESSAGE, { problem: ' (\\t)' } );
 
 //------------------------------------------------------------------------------
 // Tests

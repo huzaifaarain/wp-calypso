@@ -17,7 +17,7 @@ const getCallee = require( '../util/get-callee' ),
 // Rule Definition
 //------------------------------------------------------------------------------
 
-var rule = ( module.exports = function( context ) {
+const rule = ( module.exports = function( context ) {
 	return {
 		CallExpression: function( node ) {
 			if ( 'postMessage' !== getCallee( node ).name ) {

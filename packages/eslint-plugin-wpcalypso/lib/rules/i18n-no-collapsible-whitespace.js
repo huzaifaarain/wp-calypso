@@ -17,7 +17,7 @@ const getCallee = require( '../util/get-callee' ),
 // Rule Definition
 //------------------------------------------------------------------------------
 
-var rule = ( module.exports = function( context ) {
+const rule = ( module.exports = function( context ) {
 	return {
 		CallExpression: function( node ) {
 			if ( 'translate' !== getCallee( node ).name ) {
@@ -25,17 +25,14 @@ var rule = ( module.exports = function( context ) {
 			}
 
 			node.arguments.forEach( function( arg ) {
-				let string = getTextContentFromNode( arg ),
-					collapsibleWhitespace,
-					problem,
-					problemString,
-					problemsByCharCode;
+				const string = getTextContentFromNode( arg );
+				let problem, problemString, problemsByCharCode;
 
 				if ( ! string ) {
 					return;
 				}
 
-				collapsibleWhitespace = string.match( /(\n|\t|\r|(?:  ))/ );
+				const collapsibleWhitespace = string.match( /(\n|\t|\r|(?:  ))/ );
 
 				if ( collapsibleWhitespace ) {
 					problemsByCharCode = {

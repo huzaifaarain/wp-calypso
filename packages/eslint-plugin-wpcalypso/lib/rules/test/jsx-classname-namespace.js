@@ -6,8 +6,6 @@
  * See LICENSE.md file in root directory for full license.
  */
 
-let EXPECTED_FOO_ERROR, EXPECTED_FOO_PREFIX_ERROR;
-
 //------------------------------------------------------------------------------
 // Requirements
 //------------------------------------------------------------------------------
@@ -20,8 +18,8 @@ const rule = require( '../jsx-classname-namespace' ),
 // Constants
 //------------------------------------------------------------------------------
 
-EXPECTED_FOO_ERROR = formatMessage( rule.ERROR_MESSAGE, { expected: 'foo' } );
-EXPECTED_FOO_PREFIX_ERROR = formatMessage( rule.ERROR_MESSAGE, { expected: 'foo__ prefix' } );
+const EXPECTED_FOO_ERROR = formatMessage( rule.ERROR_MESSAGE, { expected: 'foo' } );
+const EXPECTED_FOO_PREFIX_ERROR = formatMessage( rule.ERROR_MESSAGE, { expected: 'foo__ prefix' } );
 
 //------------------------------------------------------------------------------
 // Tests

@@ -37,7 +37,7 @@ describe( '#getStringFromNode', function() {
 		);
 	} );
 
-	it( 'should return concatentated strings', function() {
+	it( 'should return more concatentated strings', function() {
 		assert.equal(
 			'A string in three parts',
 			getTextContentFromNode( parseExpressionStatement( '"A string" + " in " + "three parts"' ) )

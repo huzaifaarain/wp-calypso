@@ -16,7 +16,7 @@ const path = require( 'path' );
 // Rule Definition
 //------------------------------------------------------------------------------
 
-var rule = ( module.exports = function( context ) {
+const rule = ( module.exports = function( context ) {
 	const rootFiles = ( context.options[ 0 ] || {} ).rootFiles || rule.DEFAULT_ROOT_FILES;
 
 	function isModuleExportNode( node ) {
@@ -119,15 +119,14 @@ var rule = ( module.exports = function( context ) {
 	}
 
 	function isRootElementInFile( node ) {
-		let element,
-			isElementReturnArg,
+		let isElementReturnArg,
 			elementAssignedIdentifier,
 			parent,
 			functionExpression,
 			functionName,
 			isRoot;
 
-		element = node.parent.parent;
+		const element = node.parent.parent;
 
 		switch ( element.parent.type ) {
 			case 'ArrowFunctionExpression':
@@ -246,15 +245,7 @@ var rule = ( module.exports = function( context ) {
 
 	return {
 		JSXAttribute: function( node ) {
-			let rawClassName,
-				filename,
-				isRootElement,
-				isRootFile,
-				classNames,
-				namespace,
-				prefixPattern,
-				isError,
-				expected;
+			let rawClassName, expected;
 
 			if ( 'className' !== node.name.name ) {
 				return;
@@ -270,20 +261,20 @@ var rule = ( module.exports = function( context ) {
 				return;
 			}
 
-			filename = context.getFilename();
-			isRootFile = isFolderRootFile( filename );
-			isRootElement = isRootElementInFile( node );
+			const filename = context.getFilename();
+			const isRootFile = isFolderRootFile( filename );
+			const isRootElement = isRootElementInFile( node );
 
 			// `null` return value indicates intent to abort validation
 			if ( null === isRootElement ) {
 				return;
 			}
 
-			classNames = rawClassName.value.split( ' ' );
-			namespace = path.basename( path.dirname( filename ) );
-			prefixPattern = new RegExp( `^${ namespace }__[a-z0-9-]+$` );
+			const classNames = rawClassName.value.split( ' ' );
+			const namespace = path.basename( path.dirname( filename ) );
+			const prefixPattern = new RegExp( `^${ namespace }__[a-z0-9-]+$` );
 
-			isError = ! classNames.some( function( className ) {
+			const isError = ! classNames.some( function( className ) {
 				if ( isRootElement && isRootFile ) {
 					return className === namespace;
 				}

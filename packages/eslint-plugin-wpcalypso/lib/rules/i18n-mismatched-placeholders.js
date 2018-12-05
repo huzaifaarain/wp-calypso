@@ -24,10 +24,9 @@ const getCallee = require( '../util/get-callee' ),
 // Rule Definition
 //------------------------------------------------------------------------------
 
-var rule = ( module.exports = function( context ) {
+const rule = ( module.exports = function( context ) {
 	return {
 		CallExpression: function( node ) {
-			let singular, plural, singularMatch, pluralMatch;
 			if ( 'translate' !== getCallee( node ).name ) {
 				return;
 			}
@@ -37,16 +36,16 @@ var rule = ( module.exports = function( context ) {
 				return;
 			}
 
-			singular = getTextContentFromNode( node.arguments[ 0 ] );
-			plural = getTextContentFromNode( node.arguments[ 1 ] );
+			const singular = getTextContentFromNode( node.arguments[ 0 ] );
+			const plural = getTextContentFromNode( node.arguments[ 1 ] );
 
 			// Ignore invalid arguments
 			if ( 'string' !== typeof singular || 'string' !== typeof plural ) {
 				return;
 			}
 
-			singularMatch = singular.match( RX_PLACEHOLDERS );
-			pluralMatch = plural.match( RX_PLACEHOLDERS );
+			const singularMatch = singular.match( RX_PLACEHOLDERS );
+			const pluralMatch = plural.match( RX_PLACEHOLDERS );
 
 			// Ignore strings without any placeholders
 			if ( ! singularMatch && ! pluralMatch ) {

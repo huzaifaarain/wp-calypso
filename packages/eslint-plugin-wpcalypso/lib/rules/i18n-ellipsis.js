@@ -53,7 +53,7 @@ function makeFixerFunction( arg ) {
 	};
 }
 
-var rule = ( module.exports = function( context ) {
+const rule = ( module.exports = function( context ) {
 	return {
 		CallExpression: function( node ) {
 			if ( 'translate' !== getCallee( node ).name ) {
