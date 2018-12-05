@@ -1,12 +1,11 @@
-
+/** @format */
 /**
  * Module dependencies.
  */
-
-var url = require('url');
-var crc32 = require('crc32');
-var seed = require('seed-random');
-var debug = require('debug')('photon');
+var url = require( 'url' );
+var crc32 = require( 'crc32' );
+var seed = require( 'seed-random' );
+var debug = require( 'debug' )( 'photon' );
 
 /**
  * Module exports.
@@ -19,10 +18,10 @@ module.exports = photon;
  */
 
 var mappings = {
-  'width': 'w',
-  'height': 'h',
-  'letterboxing': 'lb',
-  'removeLetterboxing': 'ulb'
+	width: 'w',
+	height: 'h',
+	letterboxing: 'lb',
+	removeLetterboxing: 'ulb',
 };
 
 /**
@@ -39,69 +38,67 @@ var mappings = {
  * @api public
  */
 
-function photon (imageUrl, opts) {
+function photon( imageUrl, opts ) {
+	// parse the URL, assuming //host.com/path style URLs are ok and parse the querystring
+	var parsedUrl = url.parse( imageUrl, true, true ),
+		wasSecure = parsedUrl.protocol === 'https:';
 
-  // parse the URL, assuming //host.com/path style URLs are ok and parse the querystring
-  var parsedUrl = url.parse( imageUrl, true, true ),
-    wasSecure = parsedUrl.protocol === 'https:';
+	delete parsedUrl.protocol;
+	delete parsedUrl.auth;
+	delete parsedUrl.port;
 
-  delete parsedUrl.protocol;
-  delete parsedUrl.auth;
-  delete parsedUrl.port;
+	var params = {
+		slashes: true,
+		protocol: 'https:',
+		query: {},
+	};
 
-  var params = {
-    slashes: true,
-    protocol: 'https:',
-    query: {}
-  };
+	if ( isAlreadyPhotoned( parsedUrl.host ) ) {
+		// We already have a server to use.
+		// Use it, even if it doesn't match our hash.
+		params.pathname = parsedUrl.pathname;
+		params.hostname = parsedUrl.hostname;
+	} else {
+		// Photon does not support URLs with a querystring component
+		if ( parsedUrl.search ) {
+			return null;
+		}
+		var formattedUrl = url.format( parsedUrl );
+		params.pathname =
+			0 === formattedUrl.indexOf( '//' ) ? formattedUrl.substring( 1 ) : formattedUrl;
+		params.hostname = serverFromPathname( params.pathname );
+		if ( wasSecure ) {
+			params.query.ssl = 1;
+		}
+	}
 
-  if ( isAlreadyPhotoned( parsedUrl.host ) ) {
-    // We already have a server to use.
-    // Use it, even if it doesn't match our hash.
-    params.pathname = parsedUrl.pathname;
-    params.hostname = parsedUrl.hostname;
-  } else {
-    // Photon does not support URLs with a querystring component
-    if (parsedUrl.search) {
-      return null;
-    }
-    var formattedUrl = url.format( parsedUrl );
-    params.pathname = 0 === formattedUrl.indexOf( '//' ) ? formattedUrl.substring(1) : formattedUrl;
-    params.hostname = serverFromPathname( params.pathname );
-    if ( wasSecure ) {
-      params.query.ssl = 1;
-    }
-  }
+	if ( opts ) {
+		for ( var i in opts ) {
+			// allow configurable "hostname"
+			if ( i === 'host' || i === 'hostname' ) {
+				params.hostname = opts[ i ];
+				continue;
+			}
 
-  if (opts) {
-    for (var i in opts) {
+			// allow non-secure access
+			if ( i === 'secure' && ! opts[ i ] ) {
+				params.protocol = 'http:';
+				continue;
+			}
 
-      // allow configurable "hostname"
-      if (i === 'host' || i === 'hostname') {
-        params.hostname = opts[i];
-        continue;
-      }
+			params.query[ mappings[ i ] || i ] = opts[ i ];
+		}
+	}
 
-      // allow non-secure access
-      if (i === 'secure' && !opts[i]) {
-        params.protocol = 'http:';
-        continue;
-      }
+	// do this after so a passed opt can't override it
 
-      params.query[mappings[i] || i] = opts[i];
-    }
-  }
-
-  // do this after so a passed opt can't override it
-
-
-  var photonUrl = url.format(params);
-  debug('generated Photon URL: %s', photonUrl);
-  return photonUrl;
+	var photonUrl = url.format( params );
+	debug( 'generated Photon URL: %s', photonUrl );
+	return photonUrl;
 }
 
 function isAlreadyPhotoned( host ) {
-  return /^i[0-2]\.wp\.com$/.test(host);
+	return /^i[0-2]\.wp\.com$/.test( host );
 }
 
 /**
@@ -112,9 +109,9 @@ function isAlreadyPhotoned( host ) {
  * @return {string}          The hostname for the pathname
  */
 function serverFromPathname( pathname ) {
-  var hash = crc32(pathname);
-  var rng = seed(hash);
-  var server = 'i' + Math.floor(rng() * 3);
-  debug('determined server "%s" to use with "%s"', server, pathname);
-  return server + '.wp.com';
+	var hash = crc32( pathname );
+	var rng = seed( hash );
+	var server = 'i' + Math.floor( rng() * 3 );
+	debug( 'determined server "%s" to use with "%s"', server, pathname );
+	return server + '.wp.com';
 }
