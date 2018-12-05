@@ -12,7 +12,7 @@
 
 const rule = require( '../i18n-no-collapsible-whitespace' ),
 	config = { env: { es6: true } }, // support for string templates
-	formatMessage = require( '../../../tests/util/format-message' ),
+	formatMessage = require( '../../../test-utils/format-message' ),
 	RuleTester = require( 'eslint' ).RuleTester;
 
 //------------------------------------------------------------------------------

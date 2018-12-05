@@ -11,7 +11,7 @@
 //------------------------------------------------------------------------------
 
 const rule = require( '../jsx-classname-namespace' ),
-	formatMessage = require( '../../../tests/util/format-message' ),
+	formatMessage = require( '../../../test-utils/format-message' ),
 	RuleTester = require( 'eslint' ).RuleTester;
 
 //------------------------------------------------------------------------------
