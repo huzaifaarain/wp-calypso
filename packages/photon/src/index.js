@@ -2,10 +2,10 @@
 /**
  * Module dependencies.
  */
-var url = require( 'url' );
-var crc32 = require( 'crc32' );
-var seed = require( 'seed-random' );
-var debug = require( 'debug' )( 'photon' );
+const url = require( 'url' );
+const crc32 = require( 'crc32' );
+const seed = require( 'seed-random' );
+const debug = require( 'debug' )( 'photon' );
 
 /**
  * Module exports.
@@ -17,7 +17,7 @@ module.exports = photon;
  * Options argument to query string parameter mappings.
  */
 
-var mappings = {
+const mappings = {
 	width: 'w',
 	height: 'h',
 	letterboxing: 'lb',
@@ -40,14 +40,14 @@ var mappings = {
 
 function photon( imageUrl, opts ) {
 	// parse the URL, assuming //host.com/path style URLs are ok and parse the querystring
-	var parsedUrl = url.parse( imageUrl, true, true ),
+	const parsedUrl = url.parse( imageUrl, true, true ),
 		wasSecure = parsedUrl.protocol === 'https:';
 
 	delete parsedUrl.protocol;
 	delete parsedUrl.auth;
 	delete parsedUrl.port;
 
-	var params = {
+	const params = {
 		slashes: true,
 		protocol: 'https:',
 		query: {},
@@ -63,7 +63,7 @@ function photon( imageUrl, opts ) {
 		if ( parsedUrl.search ) {
 			return null;
 		}
-		var formattedUrl = url.format( parsedUrl );
+		const formattedUrl = url.format( parsedUrl );
 		params.pathname =
 			0 === formattedUrl.indexOf( '//' ) ? formattedUrl.substring( 1 ) : formattedUrl;
 		params.hostname = serverFromPathname( params.pathname );
@@ -73,7 +73,7 @@ function photon( imageUrl, opts ) {
 	}
 
 	if ( opts ) {
-		for ( var i in opts ) {
+		for ( const i in opts ) {
 			// allow configurable "hostname"
 			if ( i === 'host' || i === 'hostname' ) {
 				params.hostname = opts[ i ];
@@ -92,7 +92,7 @@ function photon( imageUrl, opts ) {
 
 	// do this after so a passed opt can't override it
 
-	var photonUrl = url.format( params );
+	const photonUrl = url.format( params );
 	debug( 'generated Photon URL: %s', photonUrl );
 	return photonUrl;
 }
@@ -109,9 +109,9 @@ function isAlreadyPhotoned( host ) {
  * @return {string}          The hostname for the pathname
  */
 function serverFromPathname( pathname ) {
-	var hash = crc32( pathname );
-	var rng = seed( hash );
-	var server = 'i' + Math.floor( rng() * 3 );
+	const hash = crc32( pathname );
+	const rng = seed( hash );
+	const server = 'i' + Math.floor( rng() * 3 );
 	debug( 'determined server "%s" to use with "%s"', server, pathname );
 	return server + '.wp.com';
 }
