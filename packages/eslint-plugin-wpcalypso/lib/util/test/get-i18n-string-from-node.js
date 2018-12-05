@@ -8,11 +8,10 @@
 
 const assert = require( 'assert' );
 const getTextContentFromNode = require( '../../../lib/util/get-text-content-from-node.js' );
-const config = require( '../../../.eslintrc.json' );
-const parser = require( config.parser );
+const parser = require( 'babel-eslint' );
 
 function parseCode( code ) {
-	const programNode = parser.parse( code, config.env );
+	const programNode = parser.parse( code );
 	// Espree thinks it's parsing a whole program, so we just need to peel away
 	// the 'Program' packaging.
 	return programNode.body[ 0 ];
